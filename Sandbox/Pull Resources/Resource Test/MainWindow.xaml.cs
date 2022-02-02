@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
+using System.Net.NetworkInformation;
 
 namespace Resource_Test
 {
@@ -27,7 +28,6 @@ namespace Resource_Test
         private PerformanceCounter memoryPerformanceCounter = new PerformanceCounter();
         private PerformanceCounter diskReadsPerformanceCounter = new PerformanceCounter();
         private PerformanceCounter diskWritesPerformanceCounter = new PerformanceCounter();
-        private PerformanceCounter diskTransfersPerformanceCounter = new PerformanceCounter();
 
         public MainWindow()
         {
@@ -42,7 +42,6 @@ namespace Resource_Test
             }
             Console.ReadLine();
 
-            /*
             this.cpuPerformanceCounter.CategoryName = "Processor";
             this.cpuPerformanceCounter.CounterName = "% Processor Time";
             this.cpuPerformanceCounter.InstanceName = "_Total";
@@ -63,7 +62,6 @@ namespace Resource_Test
                 PrintData();
                 System.Threading.Thread.Sleep(1000);
             }
-            */
         }
 
         public async void PrintData()
@@ -76,6 +74,18 @@ namespace Resource_Test
                 string currentDiskWrites = "Disk writes / sec : " + this.diskWritesPerformanceCounter.NextValue().ToString() + Environment.NewLine;
 
                 Console.Write("{0}{1}{2}{3}", currentCpuUsage, currentMemoryUsage, currentDiskReads, currentDiskWrites);
+
+                NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
+                foreach (NetworkInterface adapter in adapters)
+                {
+                    IPInterfaceProperties properties = adapter.GetIPProperties();
+                    IPv4InterfaceStatistics stats = adapter.GetIPv4Statistics();
+                    Console.WriteLine(adapter.Description);
+                    Console.WriteLine("     Speed .................................: {0}",
+                        adapter.Speed);
+                    Console.WriteLine("     Output queue length....................: {0}",
+                        stats.OutputQueueLength);
+                }
             });
         }
     }
