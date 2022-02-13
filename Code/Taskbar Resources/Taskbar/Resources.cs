@@ -6,6 +6,7 @@ using System.Linq;
 using System.Management;
 using System.Net.NetworkInformation;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Taskbar
@@ -13,6 +14,8 @@ namespace Taskbar
     /******************************************************************/
     public class Resources : INotifyPropertyChanged
     {
+        public int timeout = 1000;
+
         /* CPU Value */
         private string _cpu_value = "0 %";
 
@@ -119,38 +122,30 @@ namespace Taskbar
         /******************************************************************/
         public async void GetResources(int delay)
         {
-            /* Declare Resource Classes*/
-            CPU cpu = new CPU();
-            GPU gpu = new GPU();
-            RAM ram = new RAM();
-            Disk disk = new Disk();
-            Network network = new Network();
+            timeout = delay;
 
             /* Asynchronously pull resource values delaying each loop */
             await Task.Run(() =>
             {
-                while (true)
+                while(true)
                 {
-                    cpu_value = cpu.GetCpuValue();
-                    gpu_value = gpu.GetGpuValue();
-                    ram_value = ram.GetRamValue();
-                    disk_read_value = disk.GetDiskReadValue();
-                    disk_write_value = disk.GetDiskWriteValue();
-                    network_upload_value = network.GetNetworkUploadValue();
-                    network_download_value = network.GetNetworkDownloadValue();
-                    System.Threading.Thread.Sleep(100);
+                    GetCpuValue();
+                    GetGpuValue();
+                    GetRamValue();
+                    GetDiskReadValue();
+                    GetDiskWriteValue();
+                    GetNetworkUploadValue();
+                    GetNetworkDownloadValue();
+
+                    System.Threading.Thread.Sleep(timeout);
                 }
+                
             });
         }
         /******************************************************************/
-    }
-    /******************************************************************/
 
-    /******************************************************************/
-    public class CPU 
-    {
         /******************************************************************/
-        public string GetCpuValue()
+        public void GetCpuValue()
         {
             try
             {
@@ -161,22 +156,17 @@ namespace Taskbar
 
                 double cpu = cpuValues.PercentProcessorTime;
 
-                return cpu.ToString("F0") + " %";
+                cpu_value = cpu.ToString("F0") + " %";
             }
             catch
             {
-                return "0 %";
+                cpu_value = "0 %";
             }
         }
         /******************************************************************/
-    }
-    /******************************************************************/
 
-    /******************************************************************/
-    public class GPU
-    {
         /******************************************************************/
-        public string GetGpuValue()
+        public void GetGpuValue()
         {
             try
             {
@@ -209,22 +199,17 @@ namespace Taskbar
                     result += x.NextValue();
                 });
 
-                return result.ToString("F0") + " %";
+                gpu_value = result.ToString("F0") + " %";
             }
             catch
             {
-                return "0 %";
+                gpu_value = "0 %";
             }
         }
         /******************************************************************/
-    }
-    /******************************************************************/
 
-    /******************************************************************/
-    public class RAM
-    {
         /******************************************************************/
-        public string GetRamValue()
+        public void GetRamValue()
         {
             try
             {
@@ -238,22 +223,17 @@ namespace Taskbar
                 double total_memory = memoryValues.TotalVisibleMemorySize;
                 double percent = ((total_memory - memory) / total_memory) * 100;
 
-                return percent.ToString("F0") + " %";
+                ram_value = percent.ToString("F0") + " %";
             }
             catch
             {
-                return "0 %";
+                ram_value = "0 %";
             }
         }
         /******************************************************************/
-    }
-    /******************************************************************/
 
-    /******************************************************************/
-    public class Disk
-    {
         /******************************************************************/
-        public string GetDiskReadValue()
+        public void GetDiskReadValue()
         {
             try
             {
@@ -266,30 +246,30 @@ namespace Taskbar
 
                 if (disk_read < 1024)
                 {
-                    return disk_read.ToString("F0") + " B/s";
+                    disk_read_value = disk_read.ToString("F0") + " B/s";
                 }
-                else if (disk_read < 1024*1024)
+                else if (disk_read < 1024 * 1024)
                 {
-                    return (disk_read / (1024)).ToString("F0") + " KB/s";
+                    disk_read_value = (disk_read / (1024)).ToString("F0") + " KB/s";
                 }
-                else if (disk_read < 1024*1024*1024)
+                else if (disk_read < 1024 * 1024 * 1024)
                 {
-                    return (disk_read / (1024*1024)).ToString("F0") + " MB/s";
+                    disk_read_value = (disk_read / (1024 * 1024)).ToString("F0") + " MB/s";
                 }
                 else
                 {
-                    return (disk_read / (1024*1024*1024)).ToString("F0") + " GB/s";
+                    disk_read_value = (disk_read / (1024 * 1024 * 1024)).ToString("F0") + " GB/s";
                 }
             }
             catch
             {
-                return "0 B/s";
+                disk_read_value = "0 B/s";
             }
         }
         /******************************************************************/
 
         /******************************************************************/
-        public string GetDiskWriteValue()
+        public void GetDiskWriteValue()
         {
             try
             {
@@ -302,35 +282,30 @@ namespace Taskbar
 
                 if (disk_write < 1024)
                 {
-                    return disk_write.ToString("F0") + " B/s";
+                    disk_write_value = disk_write.ToString("F0") + " B/s";
                 }
-                else if (disk_write < 1024*1024)
+                else if (disk_write < 1024 * 1024)
                 {
-                    return (disk_write / (1024)).ToString("F0") + " KB/s";
+                    disk_write_value = (disk_write / (1024)).ToString("F0") + " KB/s";
                 }
-                else if (disk_write < 1024*1024*1024)
+                else if (disk_write < 1024 * 1024 * 1024)
                 {
-                    return (disk_write / (1024*1024)).ToString("F0") + " MB/s";
+                    disk_write_value = (disk_write / (1024 * 1024)).ToString("F0") + " MB/s";
                 }
                 else
                 {
-                    return (disk_write / (1024*1024*1024)).ToString("F0") + " GB/s";
+                    disk_write_value = (disk_write / (1024 * 1024 * 1024)).ToString("F0") + " GB/s";
                 }
             }
             catch
             {
-                return "0 B/s";
+                disk_write_value = "0 B/s";
             }
         }
         /******************************************************************/
-    }
-    /******************************************************************/
 
-    /******************************************************************/
-    public class Network
-    {
         /******************************************************************/
-        public string GetNetworkUploadValue()
+        public void GetNetworkUploadValue()
         {
             try
             {
@@ -343,61 +318,61 @@ namespace Taskbar
 
                 if (network_upload < 1024)
                 {
-                    return network_upload.ToString("F0") + " B/s";
+                    network_upload_value = network_upload.ToString("F0") + " B/s";
                 }
                 else if (network_upload < 1024 * 1024)
                 {
-                    return (network_upload / (1024)).ToString("F0") + " KB/s";
+                    network_upload_value = (network_upload / (1024)).ToString("F0") + " KB/s";
                 }
                 else if (network_upload < 1024 * 1024 * 1024)
                 {
-                    return (network_upload / (1024 * 1024)).ToString("F0") + " MB/s";
+                    network_upload_value = (network_upload / (1024 * 1024)).ToString("F0") + " MB/s";
                 }
                 else
                 {
-                    return (network_upload / (1024 * 1024 * 1024)).ToString("F0") + " GB/s";
+                    network_upload_value = (network_upload / (1024 * 1024 * 1024)).ToString("F0") + " GB/s";
                 }
             }
             catch
             {
-                return "0 B/s";
+                network_upload_value = "0 B/s";
             }
         }
         /******************************************************************/
 
         /******************************************************************/
-        public string GetNetworkDownloadValue()
+        public void GetNetworkDownloadValue()
         {
             try
-            {
-                var wmiObject = new ManagementObjectSearcher("select * from Win32_PerfFormattedData_Tcpip_NetworkInterface");
-                var networkDownloadValues = wmiObject.Get().Cast<ManagementObject>().Select(mo => new {
-                    NetworkDownload = Double.Parse(mo["BytesReceivedPerSec"].ToString())
-                }).FirstOrDefault();
+                {
+                    var wmiObject = new ManagementObjectSearcher("select * from Win32_PerfFormattedData_Tcpip_NetworkInterface");
+                    var networkDownloadValues = wmiObject.Get().Cast<ManagementObject>().Select(mo => new {
+                        NetworkDownload = Double.Parse(mo["BytesReceivedPerSec"].ToString())
+                    }).FirstOrDefault();
 
-                double network_download = networkDownloadValues.NetworkDownload;
+                    double network_download = networkDownloadValues.NetworkDownload;
 
-                if (network_download < 1024)
-                {
-                    return network_download.ToString("F0") + " B/s";
+                    if (network_download < 1024)
+                    {
+                        network_download_value = network_download.ToString("F0") + " B/s";
+                    }
+                    else if (network_download < 1024 * 1024)
+                    {
+                        network_download_value = (network_download / (1024)).ToString("F0") + " KB/s";
+                    }
+                    else if (network_download < 1024 * 1024 * 1024)
+                    {
+                        network_download_value = (network_download / (1024 * 1024)).ToString("F0") + " MB/s";
+                    }
+                    else
+                    {
+                        network_download_value = (network_download / (1024 * 1024 * 1024)).ToString("F0") + " GB/s";
+                    }
                 }
-                else if (network_download < 1024 * 1024)
+                catch
                 {
-                    return (network_download / (1024)).ToString("F0") + " KB/s";
+                    network_download_value = "0 B/s";
                 }
-                else if (network_download < 1024 * 1024 * 1024)
-                {
-                    return (network_download / (1024 * 1024)).ToString("F0") + " MB/s";
-                }
-                else
-                {
-                    return (network_download / (1024 * 1024 * 1024)).ToString("F0") + " GB/s";
-                }
-            }
-            catch
-            {
-                return "0 B/s";
-            }
         }
         /******************************************************************/
     }
