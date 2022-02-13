@@ -12,15 +12,20 @@ namespace Taskbar
 {
     public partial class Taskbar : Form
     {
+        public Resources resources = new Resources();
+
         public Taskbar()
         {
+            /* Start collecting resources */
+            resources.GetResources(500);
+
+            /* Initalize winform layout */
             InitializeComponent();
-        }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-            cpuHeader.Text = "Testing!!!";
+            /* Bind display labels to resource values */
+            cpuValue.DataBindings.Add(new Binding("Text", resources, "cpu_value", true, DataSourceUpdateMode.OnPropertyChanged));
+            gpuValue.DataBindings.Add(new Binding("Text", resources, "gpu_value", true, DataSourceUpdateMode.OnPropertyChanged));
+            ramValue.DataBindings.Add(new Binding("Text", resources, "ram_value", true, DataSourceUpdateMode.OnPropertyChanged));
         }
-
     }
 }

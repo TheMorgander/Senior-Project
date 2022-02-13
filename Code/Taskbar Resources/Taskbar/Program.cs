@@ -14,9 +14,11 @@ namespace Taskbar
         [STAThread]
         static void Main()
         {
+            /* Create new taskbar and run it */
+            Taskbar taskbar = new Taskbar();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Taskbar());
+            Application.Run(taskbar);
         }
     }
 }

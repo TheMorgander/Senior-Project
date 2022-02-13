@@ -44,6 +44,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -57,6 +58,9 @@
   <ItemGroup>
     <Compile Include="CSDeskBand.cs" />
     <Compile Include="Deskband.cs" />
+    <Compile Include="History.cs" />
+    <Compile Include="Resources.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="Taskbar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +82,16 @@
       <DependentUpon>Taskbar.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Key.snk" />
+    <None Include="Properties\DataSources\CPU.datasource" />
+    <None Include="Properties\DataSources\Deskband.datasource" />
+    <None Include="Properties\DataSources\Disk.datasource" />
+    <None Include="Properties\DataSources\GPU.datasource" />
+    <None Include="Properties\DataSources\History.datasource" />
+    <None Include="Properties\DataSources\Network.datasource" />
+    <None Include="Properties\DataSources\Program.datasource" />
+    <None Include="Properties\DataSources\RAM.datasource" />
+    <None Include="Properties\DataSources\Settings.datasource" />
+    <None Include="Properties\DataSources\Taskbar.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
