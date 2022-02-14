@@ -13,6 +13,7 @@ namespace Taskbar
     public partial class Taskbar : Form
     {
         public Resources resources = new Resources();
+        public Settings settings = new Settings();
 
         public Taskbar()
         {
