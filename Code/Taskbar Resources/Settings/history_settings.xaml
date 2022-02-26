@@ -8,7 +8,11 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="history_settings">
 
-    <Grid>
-        
-    </Grid>
+    <StackPanel>
+        <StackPanel Orientation="Vertical" Margin="0,10">
+            <Separator></Separator>
+            <TextBlock Text="History Management" FontSize="16" TextAlignment="Center"/>
+            <Separator></Separator>
+        </StackPanel>
+    </StackPanel>
 </Page>
