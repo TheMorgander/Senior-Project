@@ -12,10 +12,11 @@ namespace Taskbar
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        public static void Main()
         {
             /* Create new taskbar and run it */
             Taskbar taskbar = new Taskbar();
+            History.Initalize();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(taskbar);

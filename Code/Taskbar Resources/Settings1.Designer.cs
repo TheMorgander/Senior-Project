@@ -34,5 +34,17 @@ namespace Settings.Properties {
                 this["headings_enabled"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("60")]
+        public int history_fequency {
+            get {
+                return ((int)(this["history_fequency"]));
+            }
+            set {
+                this["history_fequency"] = value;
+            }
+        }
     }
 }

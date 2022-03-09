@@ -14,6 +14,38 @@ namespace Taskbar
     /******************************************************************/
     public class Resources : INotifyPropertyChanged
     {
+
+        //Values for storing history, move to History class in further development
+        private int timer;
+
+        private int cpu_counter;
+        private int cpu_max;
+        private int cpu_min;
+
+        private int gpu_counter;
+        private int gpu_max;
+        private int gpu_min;
+
+        private int ram_counter;
+        private int ram_max;
+        private int ram_min;
+
+        private int disk_upload_counter;
+        private int disk_upload_max;
+        private int disk_upload_min;
+
+        private int disk_download_counter;
+        private int disk_download_max;
+        private int disk_download_min;
+
+        private int network_upload_counter;
+        private int network_upload_max;
+        private int network_upload_min;
+
+        private int network_download_counter;
+        private int network_download_max;
+        private int network_download_min;
+
         public int timeout = 1000;
 
         /* CPU Value */
@@ -122,7 +154,7 @@ namespace Taskbar
         /******************************************************************/
         public async void GetResources(int delay)
         {
-            timeout = delay;
+            timeout = 15;
 
             /* Asynchronously pull resource values delaying each loop */
             await Task.Run(() =>
@@ -136,8 +168,37 @@ namespace Taskbar
                     GetDiskWriteValue();
                     GetNetworkUploadValue();
                     GetNetworkDownloadValue();
+                    
+                    //TEMP, change based on elapsed time later
+                    timer++;
 
-                    System.Threading.Thread.Sleep(timeout);
+                    //Add new values to database if enough time has elapsed
+                    if (timer > timeout)
+                    {
+                        string cpu_query = "INSERT INTO CPU(Time, Max, Min, Average) VALUES('" +
+                        DateTime.Now + "'," +
+                        cpu_max + "," +
+                        cpu_min + "," +
+                        cpu_counter / timer + ");";
+
+                        string gpu_query = "INSERT INTO GPU(Time, Max, Min, Average) VALUES('" +
+                        DateTime.Now + "'," +
+                        gpu_max + "," +
+                        gpu_min + "," +
+                        gpu_counter / timer + ");";
+
+                        string ram_query = "INSERT INTO RAM(Time, Max, Min, Average) VALUES('" +
+                        DateTime.Now + "'," +
+                        ram_max + "," +
+                        ram_min + "," +
+                        ram_counter / timer + ");";
+
+                        History.Insert(cpu_query);
+                        History.Insert(gpu_query);
+                        History.Insert(ram_query);
+                    }
+
+                    System.Threading.Thread.Sleep(500);
                 }
                 
             });
@@ -155,6 +216,16 @@ namespace Taskbar
                 }).FirstOrDefault();
 
                 double cpu = cpuValues.PercentProcessorTime;
+
+                cpu_counter += (int)cpu;
+                if (cpu_max < cpu)
+                {
+                    cpu_max = (int)cpu;
+                }
+                if (cpu_min > cpu)
+                {
+                    cpu_min = (int)cpu;
+                }
 
                 cpu_value = cpu.ToString("F0") + " %";
             }
@@ -199,6 +270,16 @@ namespace Taskbar
                     result += x.NextValue();
                 });
 
+                gpu_counter += (int)result;
+                if (gpu_max < result)
+                {
+                    gpu_max = (int)result;
+                }
+                if (gpu_min > result)
+                {
+                    gpu_min = (int)result;
+                }
+
                 gpu_value = result.ToString("F0") + " %";
             }
             catch
@@ -222,6 +303,16 @@ namespace Taskbar
                 double memory = memoryValues.FreePhysicalMemory;
                 double total_memory = memoryValues.TotalVisibleMemorySize;
                 double percent = ((total_memory - memory) / total_memory) * 100;
+
+                ram_counter += (int)percent;
+                if (ram_max < percent)
+                {
+                    ram_max = (int)percent;
+                }
+                if (ram_min > percent)
+                {
+                    ram_min = (int)percent;
+                }
 
                 ram_value = percent.ToString("F0") + " %";
             }
