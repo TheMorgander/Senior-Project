@@ -154,7 +154,7 @@ namespace Taskbar
         /******************************************************************/
         public async void GetResources(int delay)
         {
-            timeout = 15;
+            timeout = 1;
 
             /* Asynchronously pull resource values delaying each loop */
             await Task.Run(() =>
@@ -193,11 +193,40 @@ namespace Taskbar
                         ram_min + "," +
                         ram_counter / timer + ");";
 
+                        string disk_upload_query = "INSERT INTO DISK_UPLOAD(Time, Max, Min, Average) VALUES('" +
+                        DateTime.Now + "'," +
+                        disk_upload_max + "," +
+                        disk_upload_min + "," +
+                        disk_upload_counter / timer + ");";
+
+                        string disk_download_query = "INSERT INTO DISK_DOWNLOAD(Time, Max, Min, Average) VALUES('" +
+                        DateTime.Now + "'," +
+                        disk_download_max + "," +
+                        disk_download_min + "," +
+                        disk_download_counter / timer + ");";
+
+                        string network_upload_query = "INSERT INTO NETWORK_UPLOAD(Time, Max, Min, Average) VALUES('" +
+                        DateTime.Now + "'," +
+                        network_upload_max + "," +
+                        network_upload_min + "," +
+                        network_upload_counter/ timer + ");";
+
+                        string network_download_query = "INSERT INTO NETWORK_DOWNLOAD(Time, Max, Min, Average) VALUES('" +
+                        DateTime.Now + "'," +
+                        network_download_max + "," +
+                        network_download_min + "," +
+                        network_download_counter / timer + ");";
+
                         History.Insert(cpu_query);
                         History.Insert(gpu_query);
                         History.Insert(ram_query);
+                        History.Insert(disk_upload_query);
+                        History.Insert(disk_download_query);
+                        History.Insert(network_upload_query);
+                        History.Insert(network_download_query);
                     }
 
+                    //TEMP
                     System.Threading.Thread.Sleep(500);
                 }
                 
@@ -335,6 +364,16 @@ namespace Taskbar
 
                 double disk_read = diskReadValues.DiskReadRate;
 
+                disk_upload_counter += (int)disk_read;
+                if (disk_upload_max < disk_read)
+                {
+                    disk_upload_max= (int)disk_read;
+                }
+                if (disk_upload_min> disk_read)
+                {
+                    disk_upload_min = (int)disk_read;
+                }
+
                 if (disk_read < 1024)
                 {
                     disk_read_value = disk_read.ToString("F0") + " B/s";
@@ -370,6 +409,16 @@ namespace Taskbar
                 }).FirstOrDefault();
 
                 double disk_write = diskWriteValues.DiskWriteRate;
+
+                disk_download_counter += (int)disk_write;
+                if (disk_download_max < disk_write)
+                {
+                    disk_download_max = (int)disk_write;
+                }
+                if (disk_download_min > disk_write)
+                {
+                    disk_download_min = (int)disk_write;
+                }
 
                 if (disk_write < 1024)
                 {
@@ -407,6 +456,16 @@ namespace Taskbar
 
                 double network_upload = networkUploadValues.NetworkUpload;
 
+                network_upload_counter += (int)network_upload;
+                if (network_upload_max < network_upload)
+                {
+                    network_upload_max = (int)network_upload;
+                }
+                if (network_upload_min > network_upload)
+                {
+                    network_upload_min = (int)network_upload;
+                }
+
                 if (network_upload < 1024)
                 {
                     network_upload_value = network_upload.ToString("F0") + " B/s";
@@ -435,35 +494,45 @@ namespace Taskbar
         public void GetNetworkDownloadValue()
         {
             try
-                {
-                    var wmiObject = new ManagementObjectSearcher("select * from Win32_PerfFormattedData_Tcpip_NetworkInterface");
-                    var networkDownloadValues = wmiObject.Get().Cast<ManagementObject>().Select(mo => new {
-                        NetworkDownload = Double.Parse(mo["BytesReceivedPerSec"].ToString())
-                    }).FirstOrDefault();
+            {
+                var wmiObject = new ManagementObjectSearcher("select * from Win32_PerfFormattedData_Tcpip_NetworkInterface");
+                var networkDownloadValues = wmiObject.Get().Cast<ManagementObject>().Select(mo => new {
+                    NetworkDownload = Double.Parse(mo["BytesReceivedPerSec"].ToString())
+                }).FirstOrDefault();
 
-                    double network_download = networkDownloadValues.NetworkDownload;
+                double network_download = networkDownloadValues.NetworkDownload;
 
-                    if (network_download < 1024)
-                    {
-                        network_download_value = network_download.ToString("F0") + " B/s";
-                    }
-                    else if (network_download < 1024 * 1024)
-                    {
-                        network_download_value = (network_download / (1024)).ToString("F0") + " KB/s";
-                    }
-                    else if (network_download < 1024 * 1024 * 1024)
-                    {
-                        network_download_value = (network_download / (1024 * 1024)).ToString("F0") + " MB/s";
-                    }
-                    else
-                    {
-                        network_download_value = (network_download / (1024 * 1024 * 1024)).ToString("F0") + " GB/s";
-                    }
-                }
-                catch
+                network_download_counter += (int)network_download;
+                if (network_download_max < network_download)
                 {
-                    network_download_value = "0 B/s";
+                    network_download_max = (int)network_download;
                 }
+                if (network_download_min > network_download)
+                {
+                    network_download_min = (int)network_download;
+                }
+
+                if (network_download < 1024)
+                {
+                    network_download_value = network_download.ToString("F0") + " B/s";
+                }
+                else if (network_download < 1024 * 1024)
+                {
+                    network_download_value = (network_download / (1024)).ToString("F0") + " KB/s";
+                }
+                else if (network_download < 1024 * 1024 * 1024)
+                {
+                    network_download_value = (network_download / (1024 * 1024)).ToString("F0") + " MB/s";
+                }
+                else
+                {
+                    network_download_value = (network_download / (1024 * 1024 * 1024)).ToString("F0") + " GB/s";
+                }
+            }
+            catch
+            {
+                network_download_value = "0 B/s";
+            }
         }
         /******************************************************************/
     }

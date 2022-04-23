@@ -8,6 +8,7 @@ echo ---------------------------------------------------------------------------
 echo.
 
 SET path_dll=Taskbar.dll
+SET path_sqlite=System.Data.SQLite.dll
 SET path_gacutil=%PROGRAMFILES(X86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6.1 Tools\x64\gacutil.exe
 SET path_regasm=%WINDIR%\Microsoft.NET\Framework64\v4.0.30319\RegAsm.exe
 
@@ -41,9 +42,16 @@ if NOT exist %path_dll% (
 "%path_gacutil%" /u "Taskbar, Version=1.0.0.0, Culture=neutral"
 "%path_regasm%" /u %path_dll%
 
+"%path_gacutil%" /u "System.Data.SQLite"
+"%path_regasm%" /u %path_sqlite%
 
 "%path_gacutil%" /if %path_dll%
 "%path_regasm%" %path_dll%
+
+"%path_gacutil%" /if %path_sqlite%
+"%path_regasm%" %path_sqlite%
+
+pause >nul
 
 echo.
 echo ------------------------------------------------------------------------------------------------------------------------

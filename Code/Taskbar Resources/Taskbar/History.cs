@@ -19,7 +19,8 @@ namespace Taskbar
 
         static void CreateConnection()
         {
-            sqlite_connection = new SQLiteConnection("Data Source= database.db; Version = 3; New = True; Compress = True;");
+            SQLiteConnection.CreateFile("C:/Users/Morgan Anderson/OneDrive/Documents/database.sqlite");
+            sqlite_connection = new SQLiteConnection("Data Source=C:/Users/Morgan Anderson/OneDrive/Documents/database.sqlite; Version = 3; New = True; Compress = True;");
             sqlite_connection.Open();
         }
 
@@ -29,8 +30,10 @@ namespace Taskbar
             string cpu_table = "CREATE TABLE CPU(Time VARCHAR(64), Max DOUBLE, Min DOUBLE, Average DOUBLE)";
             string gpu_table = "CREATE TABLE GPU(Time VARCHAR(64), Max DOUBLE, Min DOUBLE, Average DOUBLE)";
             string ram_table = "CREATE TABLE RAM(Time VARCHAR(64), Max DOUBLE, Min DOUBLE, Average DOUBLE)";
-            string disk_table = "CREATE TABLE DISK(Time VARCHAR(64), Max DOUBLE, Min DOUBLE, Average DOUBLE)";
-            string network_table = "CREATE TABLE NETWORK(Time VARCHAR(64), Max DOUBLE, Min DOUBLE, Average DOUBLE)";
+            string disk_upload_table = "CREATE TABLE DISK_UPLOAD(Time VARCHAR(64), Max DOUBLE, Min DOUBLE, Average DOUBLE)";
+            string disk_download_table = "CREATE TABLE DISK_DOWNLOAD(Time VARCHAR(64), Max DOUBLE, Min DOUBLE, Average DOUBLE)";
+            string network_upload_table = "CREATE TABLE NETWORK_UPLOAD(Time VARCHAR(64), Max DOUBLE, Min DOUBLE, Average DOUBLE)";
+            string network_download_table = "CREATE TABLE NETWORK_DOWNLOAD(Time VARCHAR(64), Max DOUBLE, Min DOUBLE, Average DOUBLE)";
             sqlite_cmd = sqlite_connection.CreateCommand();
             sqlite_cmd.CommandText = cpu_table;
             sqlite_cmd.ExecuteNonQuery();
@@ -38,17 +41,20 @@ namespace Taskbar
             sqlite_cmd.ExecuteNonQuery();
             sqlite_cmd.CommandText = ram_table;
             sqlite_cmd.ExecuteNonQuery();
-            sqlite_cmd.CommandText = disk_table;
+            sqlite_cmd.CommandText = disk_upload_table;
             sqlite_cmd.ExecuteNonQuery();
-            sqlite_cmd.CommandText = network_table;
+            sqlite_cmd.CommandText = disk_download_table;
+            sqlite_cmd.ExecuteNonQuery();
+            sqlite_cmd.CommandText = network_upload_table;
+            sqlite_cmd.ExecuteNonQuery();
+            sqlite_cmd.CommandText = network_download_table;
             sqlite_cmd.ExecuteNonQuery();
         }
 
         public static void Insert(string query)
         {
-            SQLiteCommand sqlite_cmd;
-            sqlite_cmd = sqlite_connection.CreateCommand();
-            sqlite_cmd.CommandText = query;
+            CreateConnection();
+            SQLiteCommand sqlite_cmd = new SQLiteCommand(query, sqlite_connection);
             sqlite_cmd.ExecuteNonQuery();
         }
     }
