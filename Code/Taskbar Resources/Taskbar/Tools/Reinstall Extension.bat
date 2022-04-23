@@ -1,9 +1,9 @@
 @echo off
 
-title Shell Extension: Refresh
+title Shell Extension: Reinstall
 
 echo ------------------------------------------------------------------------------------------------------------------------
-echo ---------------------------------------------- Perform clean installation ----------------------------------------------
+echo ----------------------------------------------------- Reinstalling -----------------------------------------------------
 echo ------------------------------------------------------------------------------------------------------------------------
 echo.
 
@@ -42,8 +42,6 @@ if NOT exist %path_dll% (
 "%path_gacutil%" /u "Taskbar, Version=1.0.0.0, Culture=neutral"
 "%path_regasm%" /u %path_dll%
 
-"%path_gacutil%" /u "System.Data.SQLite"
-"%path_regasm%" /u %path_sqlite%
 
 "%path_gacutil%" /if %path_dll%
 "%path_regasm%" %path_dll%
@@ -51,14 +49,13 @@ if NOT exist %path_dll% (
 "%path_gacutil%" /if %path_sqlite%
 "%path_regasm%" %path_sqlite%
 
-pause >nul
-
 echo.
 echo ------------------------------------------------------------------------------------------------------------------------
-echo ----------------------------------------------- Reinstallation complete ------------------------------------------------
+echo ----------------------------------------------- Reinstallation Complete ------------------------------------------------
 echo ------------------------------------------------------------------------------------------------------------------------
 echo
 
+pause >nul
 
 taskkill.exe /im explorer.exe /f
 explorer

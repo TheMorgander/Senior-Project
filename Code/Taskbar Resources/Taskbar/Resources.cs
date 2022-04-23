@@ -217,13 +217,13 @@ namespace Taskbar
                         network_download_min + "," +
                         network_download_counter / timer + ");";
 
-                        History.Insert(cpu_query);
-                        History.Insert(gpu_query);
-                        History.Insert(ram_query);
-                        History.Insert(disk_upload_query);
-                        History.Insert(disk_download_query);
-                        History.Insert(network_upload_query);
-                        History.Insert(network_download_query);
+                        //History.Insert(cpu_query);
+                        //History.Insert(gpu_query);
+                        //History.Insert(ram_query);
+                        //History.Insert(disk_upload_query);
+                        //History.Insert(disk_download_query);
+                        //History.Insert(network_upload_query);
+                        //History.Insert(network_download_query);
                     }
 
                     //TEMP

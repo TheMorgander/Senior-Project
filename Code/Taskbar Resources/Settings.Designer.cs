@@ -25,18 +25,6 @@ namespace Taskbar.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool headings_enabled {
-            get {
-                return ((bool)(this["headings_enabled"]));
-            }
-            set {
-                this["headings_enabled"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("60")]
         public int history_fequency {
             get {
@@ -44,6 +32,27 @@ namespace Taskbar.Properties {
             }
             set {
                 this["history_fequency"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool headings_enabled {
+            get {
+                return ((bool)(this["headings_enabled"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("A test")]
+        public string testing {
+            get {
+                return ((string)(this["testing"]));
+            }
+            set {
+                this["testing"] = value;
             }
         }
     }

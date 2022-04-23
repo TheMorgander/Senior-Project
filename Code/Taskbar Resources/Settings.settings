@@ -1,12 +1,15 @@
 <?xml version='1.0' encoding='iso-8859-1'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Settings.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Taskbar.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="headings_enabled" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
     <Setting Name="history_fequency" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">60</Value>
+    </Setting>
+    <Setting Name="headings_enabled" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="testing" Type="System.String" Scope="User">
+      <Value Profile="(Default)">A test</Value>
     </Setting>
   </Settings>
 </SettingsFile>
