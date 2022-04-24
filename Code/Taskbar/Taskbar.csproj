@@ -136,7 +136,6 @@
     <EmbeddedResource Include="Taskbar.resx">
       <DependentUpon>Taskbar.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="app.config" />
     <None Include="Key.snk" />
     <None Include="packages.config" />
     <None Include="Tools\Install Extension.bat" />
