@@ -51,62 +51,60 @@ namespace Taskbar
             // cpuHeader
             // 
             this.cpuHeader.AutoSize = true;
-            this.cpuHeader.Enabled = global::Taskbar.Properties.Settings.Default.headings_enabled;
             this.cpuHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cpuHeader.Location = new System.Drawing.Point(15, 4);
             this.cpuHeader.Name = "cpuHeader";
             this.cpuHeader.Size = new System.Drawing.Size(31, 13);
             this.cpuHeader.TabIndex = 0;
             this.cpuHeader.Text = "CPU";
-            this.cpuHeader.Visible = global::Taskbar.Properties.Settings.Default.headings_enabled;
             // 
             // gpuHeader
             // 
             this.gpuHeader.AutoSize = true;
-            this.gpuHeader.Enabled = global::Taskbar.Properties.Settings.Default.headings_enabled;
+            this.gpuHeader.Enabled = false;
             this.gpuHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gpuHeader.Location = new System.Drawing.Point(84, 4);
             this.gpuHeader.Name = "gpuHeader";
             this.gpuHeader.Size = new System.Drawing.Size(32, 13);
             this.gpuHeader.TabIndex = 14;
             this.gpuHeader.Text = "GPU";
-            this.gpuHeader.Visible = global::Taskbar.Properties.Settings.Default.headings_enabled;
+            this.gpuHeader.Visible = false;
             // 
             // ramHeader
             // 
             this.ramHeader.AutoSize = true;
-            this.ramHeader.Enabled = global::Taskbar.Properties.Settings.Default.headings_enabled;
+            this.ramHeader.Enabled = false;
             this.ramHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ramHeader.Location = new System.Drawing.Point(152, 4);
             this.ramHeader.Name = "ramHeader";
             this.ramHeader.Size = new System.Drawing.Size(33, 13);
             this.ramHeader.TabIndex = 1;
             this.ramHeader.Text = "RAM";
-            this.ramHeader.Visible = global::Taskbar.Properties.Settings.Default.headings_enabled;
+            this.ramHeader.Visible = false;
             // 
             // diskHeader
             // 
             this.diskHeader.AutoSize = true;
-            this.diskHeader.Enabled = global::Taskbar.Properties.Settings.Default.headings_enabled;
+            this.diskHeader.Enabled = false;
             this.diskHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.diskHeader.Location = new System.Drawing.Point(227, 4);
             this.diskHeader.Name = "diskHeader";
             this.diskHeader.Size = new System.Drawing.Size(31, 13);
             this.diskHeader.TabIndex = 2;
             this.diskHeader.Text = "Disk";
-            this.diskHeader.Visible = global::Taskbar.Properties.Settings.Default.headings_enabled;
+            this.diskHeader.Visible = false;
             // 
             // networkHeader
             // 
             this.networkHeader.AutoSize = true;
-            this.networkHeader.Enabled = global::Taskbar.Properties.Settings.Default.headings_enabled;
+            this.networkHeader.Enabled = false;
             this.networkHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.networkHeader.Location = new System.Drawing.Point(321, 4);
             this.networkHeader.Name = "networkHeader";
             this.networkHeader.Size = new System.Drawing.Size(52, 13);
             this.networkHeader.TabIndex = 3;
             this.networkHeader.Text = "Network";
-            this.networkHeader.Visible = global::Taskbar.Properties.Settings.Default.headings_enabled;
+            this.networkHeader.Visible = false;
             // 
             // cpuValue
             // 

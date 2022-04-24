@@ -24,6 +24,7 @@ namespace Settings
         public MainWindow()
         {
             InitializeComponent();
+            Taskbar.Settings.Initalize();
             Main.Content = new general_settings();
             Main.NavigationUIVisibility = NavigationUIVisibility.Hidden;
         }

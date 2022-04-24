@@ -16,14 +16,14 @@
         </StackPanel>
         
         <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <CheckBox Content="CPU" Margin="10,0,50,0"/>
-            <CheckBox Content="GPU" Margin="10,0,50,0"/>
-            <CheckBox Content="RAM" Margin="10,0,50,0"/>
-            <CheckBox Content="Disk" Margin="10,0,50,0"/>
-            <CheckBox Content="Network" Margin="10,0,50,0"/>
+            <CheckBox Content="CPU" Margin="10,0,50,0" IsChecked="{Binding Path=layout_cpu_enabled}"/>
+            <CheckBox Content="GPU" Margin="10,0,50,0" IsChecked="{Binding Path=layout_gpu_enabled}"/>
+            <CheckBox Content="RAM" Margin="10,0,50,0" IsChecked="{Binding Path=layout_ram_enabled}"/>
+            <CheckBox Content="Disk" Margin="10,0,50,0" IsChecked="{Binding Path=layout_disk_enabled}"/>
+            <CheckBox Content="Network" Margin="10,0,50,0" IsChecked="{Binding Path=layout_network_enabled}"/>
         </StackPanel>
 
-        
+
 
         <StackPanel Orientation="Vertical" Margin="0,10">
             <Separator></Separator>
@@ -31,101 +31,63 @@
             <Separator></Separator>
         </StackPanel>
 
+        <Separator Margin="0,10,0,2" Width="100"></Separator>
+        <TextBlock Text="Headers" FontSize="12" TextAlignment="Center" Margin="0" FontWeight="Bold"/>
+        <Separator Margin="0,10,0,2" Width="100"></Separator>
+
+        <CheckBox Content="Enabled" Margin="0,10,0,10" HorizontalAlignment="Center" IsChecked="{Binding Path=layout_header_enabled}"/>
+        
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,0">
+            <CheckBox Content="Bold" Margin="0,5,50,0" IsChecked="{Binding Path=layout_header_bold}"/>
+            <CheckBox Content="Italic" Margin="0,5,50,0" IsChecked="{Binding Path=layout_header_italic}"/>
+            <CheckBox Content="Underline" Margin="0,5,0,0" IsChecked="{Binding Path=layout_header_underline}"/>
+        </StackPanel>
+
         <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel Orientation="Vertical" Margin="0,0,50,0">
+                <Separator Margin="0,10,0,2"></Separator>
                 <TextBlock Text="CPU" FontSize="12" TextAlignment="Center" Margin="0" FontWeight="Bold"/>
                 <Separator Margin="0,10,0,2"></Separator>
-                <TextBlock Text="Header" FontSize="12" TextAlignment="Center"/>
-                <Separator></Separator>
-                <CheckBox Content="Enabled" Margin="0,5"/>
-                <ComboBox Width="100" Text="Color" />
-                <CheckBox Content="Bold" Margin="0,5"/>
-                <CheckBox Content="Italic" Margin="0,5"/>
-                <CheckBox Content="Underline" Margin="0,5"/>
-                <Separator Margin="0,25,0,2"></Separator>
-                <TextBlock Text="Values" FontSize="12" TextAlignment="Center"/>
-                <Separator></Separator>
                 <ComboBox Width="100" Text="Color" Margin="0,5,0,0" />
-                <CheckBox Content="Bold" Margin="0,5"/>
-                <CheckBox Content="Italic" Margin="0,5"/>
-                <CheckBox Content="Underline" Margin="0,5"/>
-                <Separator></Separator>
+                <CheckBox Content="Bold" Margin="0,5" IsChecked="{Binding Path=layout_cpu_bold}"/>
+                <CheckBox Content="Italic" Margin="0,5" IsChecked="{Binding Path=layout_cpu_italic}"/>
+                <CheckBox Content="Underline" Margin="0,5" IsChecked="{Binding Path=layout_cpu_underline}"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="0,0,50,0">
+                <Separator Margin="0,10,0,2"></Separator>
                 <TextBlock Text="GPU" FontSize="12" TextAlignment="Center" Margin="0" FontWeight="Bold"/>
                 <Separator Margin="0,10,0,2"></Separator>
-                <TextBlock Text="Header" FontSize="12" TextAlignment="Center"/>
-                <Separator></Separator>
-                <CheckBox Content="Enabled" Margin="0,5"/>
-                <ComboBox Width="100" Text="Color" />
-                <CheckBox Content="Bold" Margin="0,5"/>
-                <CheckBox Content="Italic" Margin="0,5"/>
-                <CheckBox Content="Underline" Margin="0,5"/>
-                <Separator Margin="0,25,0,2"></Separator>
-                <TextBlock Text="Values" FontSize="12" TextAlignment="Center"/>
-                <Separator></Separator>
                 <ComboBox Width="100" Text="Color" Margin="0,5,0,0" />
-                <CheckBox Content="Bold" Margin="0,5"/>
-                <CheckBox Content="Italic" Margin="0,5"/>
-                <CheckBox Content="Underline" Margin="0,5"/>
-                <Separator></Separator>
+                <CheckBox Content="Bold" Margin="0,5" IsChecked="{Binding Path=layout_gpu_bold}"/>
+                <CheckBox Content="Italic" Margin="0,5" IsChecked="{Binding Path=layout_gpu_italic}"/>
+                <CheckBox Content="Underline" Margin="0,5" IsChecked="{Binding Path=layout_gpu_underline}"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="0,0,50,0">
+                <Separator Margin="0,10,0,2"></Separator>
                 <TextBlock Text="RAM" FontSize="12" TextAlignment="Center" Margin="0" FontWeight="Bold"/>
                 <Separator Margin="0,10,0,2"></Separator>
-                <TextBlock Text="Header" FontSize="12" TextAlignment="Center"/>
-                <Separator></Separator>
-                <CheckBox Content="Enabled" Margin="0,5"/>
-                <ComboBox Width="100" Text="Color" />
-                <CheckBox Content="Bold" Margin="0,5"/>
-                <CheckBox Content="Italic" Margin="0,5"/>
-                <CheckBox Content="Underline" Margin="0,5"/>
-                <Separator Margin="0,25,0,2"></Separator>
-                <TextBlock Text="Values" FontSize="12" TextAlignment="Center"/>
-                <Separator></Separator>
                 <ComboBox Width="100" Text="Color" Margin="0,5,0,0" />
-                <CheckBox Content="Bold" Margin="0,5"/>
-                <CheckBox Content="Italic" Margin="0,5"/>
-                <CheckBox Content="Underline" Margin="0,5"/>
-                <Separator></Separator>
+                <CheckBox Content="Bold" Margin="0,5" IsChecked="{Binding Path=layout_ram_bold}"/>
+                <CheckBox Content="Italic" Margin="0,5" IsChecked="{Binding Path=layout_ram_italic}"/>
+                <CheckBox Content="Underline" Margin="0,5" IsChecked="{Binding Path=layout_ram_underline}"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="0,0,50,0">
+                <Separator Margin="0,10,0,2"></Separator>
                 <TextBlock Text="Disk" FontSize="12" TextAlignment="Center" Margin="0" FontWeight="Bold"/>
                 <Separator Margin="0,10,0,2"></Separator>
-                <TextBlock Text="Header" FontSize="12" TextAlignment="Center"/>
-                <Separator></Separator>
-                <CheckBox Content="Enabled" Margin="0,5"/>
-                <ComboBox Width="100" Text="Color" />
-                <CheckBox Content="Bold" Margin="0,5"/>
-                <CheckBox Content="Italic" Margin="0,5"/>
-                <CheckBox Content="Underline" Margin="0,5"/>
-                <Separator Margin="0,25,0,2"></Separator>
-                <TextBlock Text="Values" FontSize="12" TextAlignment="Center"/>
-                <Separator></Separator>
                 <ComboBox Width="100" Text="Color" Margin="0,5,0,0" />
-                <CheckBox Content="Bold" Margin="0,5"/>
-                <CheckBox Content="Italic" Margin="0,5"/>
-                <CheckBox Content="Underline" Margin="0,5"/>
-                <Separator></Separator>
+                <CheckBox Content="Bold" Margin="0,5" IsChecked="{Binding Path=layout_disk_bold}"/>
+                <CheckBox Content="Italic" Margin="0,5" IsChecked="{Binding Path=layout_disk_italic}"/>
+                <CheckBox Content="Underline" Margin="0,5" IsChecked="{Binding Path=layout_disk_underline}"/>
             </StackPanel>
             <StackPanel Orientation="Vertical">
+                <Separator Margin="0,10,0,2"></Separator>
                 <TextBlock Text="Network" FontSize="12" TextAlignment="Center" Margin="0" FontWeight="Bold"/>
                 <Separator Margin="0,10,0,2"></Separator>
-                <TextBlock Text="Header" FontSize="12" TextAlignment="Center"/>
-                <Separator></Separator>
-                <CheckBox Content="Enabled" Margin="0,5"/>
-                <ComboBox Width="100" Text="Color" />
-                <CheckBox Content="Bold" Margin="0,5"/>
-                <CheckBox Content="Italic" Margin="0,5"/>
-                <CheckBox Content="Underline" Margin="0,5"/>
-                <Separator Margin="0,25,0,2"></Separator>
-                <TextBlock Text="Values" FontSize="12" TextAlignment="Center"/>
-                <Separator></Separator>
                 <ComboBox Width="100" Text="Color" Margin="0,5,0,0" />
-                <CheckBox Content="Bold" Margin="0,5"/>
-                <CheckBox Content="Italic" Margin="0,5"/>
-                <CheckBox Content="Underline" Margin="0,5"/>
-                <Separator></Separator>
+                <CheckBox Content="Bold" Margin="0,5" IsChecked="{Binding Path=layout_network_bold}"/>
+                <CheckBox Content="Italic" Margin="0,5" IsChecked="{Binding Path=layout_network_italic}"/>
+                <CheckBox Content="Underline" Margin="0,5" IsChecked="{Binding Path=layout_network_underline}"/>
             </StackPanel>
         </StackPanel>
     </StackPanel>
