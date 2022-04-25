@@ -9,6 +9,7 @@ echo.
 
 SET path_dll=Taskbar.dll
 SET path_sqlite=System.Data.SQLite.dll
+SET path_json=Newtonsoft.Json.dll
 SET path_gacutil=%PROGRAMFILES(X86)%\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6.1 Tools\x64\gacutil.exe
 SET path_regasm=%WINDIR%\Microsoft.NET\Framework64\v4.0.30319\RegAsm.exe
 
@@ -48,6 +49,9 @@ if NOT exist %path_dll% (
 
 "%path_gacutil%" /if %path_sqlite%
 "%path_regasm%" %path_sqlite%
+
+"%path_gacutil%" /if %path_json%
+"%path_regasm%" %path_json%
 
 echo.
 echo ------------------------------------------------------------------------------------------------------------------------

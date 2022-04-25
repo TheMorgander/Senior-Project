@@ -6,11 +6,21 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Taskbar;
 
 namespace Taskbar
 {
-    public class Settings : INotifyPropertyChanged
+    public class Config : INotifyPropertyChanged
     {
+        /******************************************************************/
+        #region General Variables
+        private static Dictionary<string, string> settings = new Dictionary<string, string>();
+        private static string config_file = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/config.json";
+        #endregion
+        /******************************************************************/
+
+        /******************************************************************/
+        #region Watched Variables
         public bool layout_cpu_enabled
         {
             get { return bool.Parse(GetValue("layout_cpu_enabled")); }
@@ -162,96 +172,137 @@ namespace Taskbar
             get { return bool.Parse(GetValue("layout_network_underline")); }
             set { SetValue("layout_network_underline", value.ToString()); OnPropertyChanged("layout_network_underline"); }
         }
+        #endregion
+        /******************************************************************/
 
-        /* Value change listener */
+        /******************************************************************/
+        #region Variable Listener
         protected virtual void OnPropertyChanged(string property)
         {
             if (PropertyChanged != null)
+            {
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
+            }
         }
-
-        #region INotifyPropertyChanged Members
 
         public event PropertyChangedEventHandler PropertyChanged;
-
         #endregion
+        /******************************************************************/
 
-        private static Dictionary<string, string> settings = new Dictionary<string, string>();
-
-        public static void Initalize()
+        /******************************************************************/
+        public void Initalize()
         {
-            if (File.Exists("config.json"))
+            try
             {
-                ReadConfig();
+                if (File.Exists(config_file))
+                {
+                    ReadConfig();
+                }
+                else
+                {
+                    File.Create(config_file).Dispose();
+                    Default();
+                    WriteConfig();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                File.Create("config.json").Dispose();
-                Default();
-                WriteConfig();
+                System.Windows.Forms.MessageBox.Show(ex.Message + "\n" + ex.StackTrace);
             }
         }
+        /******************************************************************/
 
+        /******************************************************************/
         public static void SetValue(string key, string value)
         {
             settings[key] = value;
             WriteConfig();
         }
+        /******************************************************************/
 
+        /******************************************************************/
         public static string GetValue(string key)
         {
             return settings[key];
         }
+        /******************************************************************/
 
+        /******************************************************************/
         private static void ReadConfig()
         {
-            string json = File.ReadAllText(@"config.json");
-            settings = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+            try
+            {
+                string json = File.ReadAllText(config_file);
+                settings = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message + "\n" + ex.StackTrace);
+            }   
         }
+        /******************************************************************/
 
+        /******************************************************************/
         private static void WriteConfig()
         {
-            string json = JsonConvert.SerializeObject(settings);
-            System.IO.File.WriteAllText(@"config.json", json);
+            try
+            {
+                string json = JsonConvert.SerializeObject(settings);
+                System.IO.File.WriteAllText(config_file, json);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message + "\n" + ex.StackTrace);
+            }
         }
+        /******************************************************************/
 
+        /******************************************************************/
         private static void Default()
         {
-            settings.Add("layout_cpu_enabled", "True");
-            settings.Add("layout_gpu_enabled", "True");
-            settings.Add("layout_ram_enabled", "True");
-            settings.Add("layout_disk_enabled", "True");
-            settings.Add("layout_network_enabled", "True");
+            try
+            {
+                settings.Add("layout_cpu_enabled", "True");
+                settings.Add("layout_gpu_enabled", "True");
+                settings.Add("layout_ram_enabled", "True");
+                settings.Add("layout_disk_enabled", "True");
+                settings.Add("layout_network_enabled", "True");
 
-            settings.Add("layout_header_enabled", "True");
-            settings.Add("layout_header_bold", "False");
-            settings.Add("layout_header_italic", "False");
-            settings.Add("layout_header_underline", "False");
+                settings.Add("layout_header_enabled", "True");
+                settings.Add("layout_header_bold", "False");
+                settings.Add("layout_header_italic", "False");
+                settings.Add("layout_header_underline", "False");
 
-            settings.Add("layout_cpu_color", "White");
-            settings.Add("layout_cpu_bold", "False");
-            settings.Add("layout_cpu_italic", "False");
-            settings.Add("layout_cpu_underline", "False");
+                settings.Add("layout_cpu_color", "White");
+                settings.Add("layout_cpu_bold", "False");
+                settings.Add("layout_cpu_italic", "False");
+                settings.Add("layout_cpu_underline", "False");
 
-            settings.Add("layout_gpu_color", "White");
-            settings.Add("layout_gpu_bold", "False");
-            settings.Add("layout_gpu_italic", "False");
-            settings.Add("layout_gpu_underline", "False");
+                settings.Add("layout_gpu_color", "White");
+                settings.Add("layout_gpu_bold", "False");
+                settings.Add("layout_gpu_italic", "False");
+                settings.Add("layout_gpu_underline", "False");
 
-            settings.Add("layout_ram_color", "White");
-            settings.Add("layout_ram_bold", "False");
-            settings.Add("layout_ram_italic", "False");
-            settings.Add("layout_ram_underline", "False");
+                settings.Add("layout_ram_color", "White");
+                settings.Add("layout_ram_bold", "False");
+                settings.Add("layout_ram_italic", "False");
+                settings.Add("layout_ram_underline", "False");
 
-            settings.Add("layout_disk_color", "White");
-            settings.Add("layout_disk_bold", "False");
-            settings.Add("layout_disk_italic", "False");
-            settings.Add("layout_disk_underline", "False");
+                settings.Add("layout_disk_color", "White");
+                settings.Add("layout_disk_bold", "False");
+                settings.Add("layout_disk_italic", "False");
+                settings.Add("layout_disk_underline", "False");
 
-            settings.Add("layout_network_color", "White");
-            settings.Add("layout_network_bold", "False");
-            settings.Add("layout_network_italic", "False");
-            settings.Add("layout_network_underline", "False");
+                settings.Add("layout_network_color", "White");
+                settings.Add("layout_network_bold", "False");
+                settings.Add("layout_network_italic", "False");
+                settings.Add("layout_network_underline", "False");
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message + "\n" + ex.StackTrace);
+            }
         }
+        /******************************************************************/
     }
 }
