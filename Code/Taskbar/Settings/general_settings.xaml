@@ -30,7 +30,7 @@
 
         <StackPanel Orientation="Horizontal" Margin="10">
             <TextBlock TextWrapping="Wrap" Text="Enable Taskbar" VerticalAlignment="Center" Margin="25,0,0,0"/>
-            <CheckBox x:Name="enable_taskbar" Checked="CheckBox_Checked_1" VerticalAlignment="Center" HorizontalAlignment="Left" Padding="0" UseLayoutRounding="False" Margin="25,0,0,0" VerticalContentAlignment="Center" IsChecked="{Binding headings_enabled}">
+            <CheckBox x:Name="enable_taskbar" VerticalAlignment="Center" HorizontalAlignment="Left" Padding="0" UseLayoutRounding="False" Margin="25,0,0,0" VerticalContentAlignment="Center" IsChecked="{Binding headings_enabled}">
             </CheckBox>
         </StackPanel>
         

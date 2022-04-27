@@ -11,12 +11,12 @@ namespace Taskbar
     {
         /******************************************************************/
         #region General Variables
-        public static SQLiteConnection sqlite_connection;
+        private SQLiteConnection sqlite_connection;
         #endregion
         /******************************************************************/
 
         /******************************************************************/
-        public void Initalize()
+        protected internal void Initalize()
         {
             try
             {
@@ -31,7 +31,7 @@ namespace Taskbar
         /******************************************************************/
 
         /******************************************************************/
-        static void CreateConnection()
+        private void CreateConnection()
         {
             try
             {
@@ -46,7 +46,7 @@ namespace Taskbar
         /******************************************************************/
 
         /******************************************************************/
-        static void CreateTable()
+        private void CreateTable()
         {
             try
             {
@@ -81,7 +81,7 @@ namespace Taskbar
         /******************************************************************/
 
         /******************************************************************/
-        public static void Insert(string query)
+        protected internal void Insert(string query)
         {
             try
             {

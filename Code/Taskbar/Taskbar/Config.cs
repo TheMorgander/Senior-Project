@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Taskbar;
 
 namespace Taskbar
@@ -24,22 +25,22 @@ namespace Taskbar
         public bool layout_cpu_enabled
         {
             get { return bool.Parse(GetValue("layout_cpu_enabled")); }
-            set { SetValue("layout_cpu_enabled", value.ToString()); OnPropertyChanged("layout_cpu_enabled"); }
+            set { SetValue("layout_cpu_enabled", value.ToString()); }
         }
         public bool layout_gpu_enabled
         {
             get { return bool.Parse(GetValue("layout_gpu_enabled")); }
-            set { SetValue("layout_gpu_enabled", value.ToString()); OnPropertyChanged("layout_gpu_enabled"); }
+            set { SetValue("layout_gpu_enabled", value.ToString()); }
         }
         public bool layout_ram_enabled
         {
             get { return bool.Parse(GetValue("layout_ram_enabled")); }
-            set { SetValue("layout_ram_enabled", value.ToString()); OnPropertyChanged("layout_ram_enabled"); }
+            set { SetValue("layout_ram_enabled", value.ToString()); }
         }
         public bool layout_disk_enabled
         {
             get { return bool.Parse(GetValue("layout_disk_enabled")); }
-            set { SetValue("layout_disk_enabled", value.ToString()); OnPropertyChanged("layout_disk_enabled"); }
+            set { SetValue("layout_disk_enabled", value.ToString()); }
         }
         public bool layout_network_enabled
         {
@@ -190,7 +191,7 @@ namespace Taskbar
         /******************************************************************/
 
         /******************************************************************/
-        public void Initalize()
+        protected internal void Initalize()
         {
             try
             {
@@ -213,22 +214,23 @@ namespace Taskbar
         /******************************************************************/
 
         /******************************************************************/
-        public static void SetValue(string key, string value)
+        private void SetValue(string key, string value)
         {
             settings[key] = value;
+            OnPropertyChanged(key);
             WriteConfig();
         }
         /******************************************************************/
 
         /******************************************************************/
-        public static string GetValue(string key)
+        private string GetValue(string key)
         {
             return settings[key];
         }
         /******************************************************************/
 
         /******************************************************************/
-        private static void ReadConfig()
+        private void ReadConfig()
         {
             try
             {
@@ -243,7 +245,7 @@ namespace Taskbar
         /******************************************************************/
 
         /******************************************************************/
-        private static void WriteConfig()
+        private void WriteConfig()
         {
             try
             {
@@ -258,7 +260,7 @@ namespace Taskbar
         /******************************************************************/
 
         /******************************************************************/
-        private static void Default()
+        private void Default()
         {
             try
             {

@@ -125,7 +125,7 @@ namespace Taskbar
         /******************************************************************/
 
         /******************************************************************/
-        public async void Initalize()
+        protected internal async void Initalize()
         {
             try
             {
@@ -268,7 +268,7 @@ namespace Taskbar
         /******************************************************************/
 
         /******************************************************************/
-        public void GetCpuValue()
+        private void GetCpuValue()
         {
             try
             {
@@ -300,7 +300,7 @@ namespace Taskbar
         /******************************************************************/
 
         /******************************************************************/
-        public void GetGpuValue()
+        private void GetGpuValue()
         {
             try
             {
@@ -354,7 +354,7 @@ namespace Taskbar
         /******************************************************************/
 
         /******************************************************************/
-        public void GetRamValue()
+        private void GetRamValue()
         {
             try
             {
@@ -389,7 +389,7 @@ namespace Taskbar
         /******************************************************************/
 
         /******************************************************************/
-        public void GetDiskReadValue()
+        private void GetDiskReadValue()
         {
             try
             {
@@ -437,7 +437,7 @@ namespace Taskbar
         /******************************************************************/
 
         /******************************************************************/
-        public void GetDiskWriteValue()
+        private void GetDiskWriteValue()
         {
             try
             {
@@ -485,7 +485,7 @@ namespace Taskbar
         /******************************************************************/
 
         /******************************************************************/
-        public void GetNetworkUploadValue()
+        private void GetNetworkUploadValue()
         {
             try
             {
@@ -533,7 +533,7 @@ namespace Taskbar
         /******************************************************************/
 
         /******************************************************************/
-        public void GetNetworkDownloadValue()
+        private void GetNetworkDownloadValue()
         {
             try
             {
