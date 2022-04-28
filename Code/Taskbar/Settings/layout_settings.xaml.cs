@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 using Config = Taskbar.Config;
 using Resources = Taskbar.Resources;
@@ -15,59 +13,44 @@ namespace Settings
     {
         /******************************************************************/
         #region Taskbar Accessors
-        public static Config config = Taskbar.Taskbar.taskbar.config;
-        public static History history = Taskbar.Taskbar.taskbar.history;
-        public static Resources resources = Taskbar.Taskbar.taskbar.resources;
+        protected internal static Config config = Taskbar.Taskbar.config;
+        protected internal static History history = Taskbar.Taskbar.history;
+        protected internal static Resources resources = Taskbar.Taskbar.resources;
         #endregion
         /******************************************************************/
 
         /******************************************************************/
         #region Watched Variables
-        public bool layout_cpu_enabled
+        protected internal bool layout_cpu_enabled
         {
-            get { return config.layout_cpu_enabled; }
-            set { config.layout_cpu_enabled = value; OnPropertyChanged("layout_cpu_enabled"); }
+            get { return config.GetValue("layout_cpu_enabled"); }
+            set { config.SetValue("layout_cpu_enabled", value); }
         }
-        public bool layout_gpu_enabled
+        protected internal bool layout_gpu_enabled
         {
-            get { return Taskbar.Taskbar.taskbar.config.layout_gpu_enabled; ; }
-            set { config.layout_gpu_enabled = value; ; OnPropertyChanged("layout_gpu_enabled"); }
+            get { return config.GetValue("layout_gpu_enabled"); }
+            set { config.SetValue("layout_gpu_enabled", value); }
         }
-        public bool layout_ram_enabled
+        protected internal bool layout_ram_enabled
         {
-            get { return config.layout_ram_enabled; }
-            set { config.layout_ram_enabled = value; OnPropertyChanged("layout_ram_enabled"); }
+            get { return config.GetValue("layout_ram_enabled"); }
+            set { config.SetValue("layout_ram_enabled", value); }
         }
-        public bool layout_disk_enabled
+        protected internal bool layout_disk_enabled
         {
-            get { return config.layout_disk_enabled; }
-            set { config.layout_disk_enabled = value; OnPropertyChanged("layout_disk_enabled"); }
+            get { return config.GetValue("layout_disk_enabled"); }
+            set { config.SetValue("layout_disk_enabled", value); }
         }
-        public bool layout_network_enabled
+        protected internal bool layout_network_enabled
         {
-            get { return config.layout_network_enabled; }
-            set { config.layout_network_enabled = value; OnPropertyChanged("layout_network_enabled"); }
+            get { return config.GetValue("layout_network_enabled"); }
+            set { config.SetValue("layout_network_enabled", value); }
         }
         #endregion
         /******************************************************************/
 
         /******************************************************************/
-        #region Variable Listener
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChangedEventHandler handler = this.PropertyChanged;
-            if (handler != null)
-            {
-                var e = new PropertyChangedEventArgs(propertyName);
-                handler(this, e);
-            }
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
-        #endregion
-        /******************************************************************/
-
-        /******************************************************************/
-        public layout_settings()
+        protected internal layout_settings()
         {
             InitializeComponent();
             DataContext = this;

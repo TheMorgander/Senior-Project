@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows.Controls;
+
+using Config = Taskbar.Config;
+using Resources = Taskbar.Resources;
+using History = Taskbar.History;
 
 namespace Settings
 {
@@ -20,7 +11,15 @@ namespace Settings
     /// </summary>
     public partial class about : Page
     {
-        public about()
+        /******************************************************************/
+        #region Taskbar Accessors
+        protected internal static Config config = Taskbar.Taskbar.config;
+        protected internal static History history = Taskbar.Taskbar.history;
+        protected internal static Resources resources = Taskbar.Taskbar.resources;
+        #endregion
+        /******************************************************************/
+
+        protected internal about()
         {
             InitializeComponent();
         }

@@ -13,13 +13,13 @@ namespace Settings
     {
         /******************************************************************/
         #region Taskbar Accessors
-        public static Config config = Taskbar.Taskbar.taskbar.config;
-        public static History history = Taskbar.Taskbar.taskbar.history;
-        public static Resources resources = Taskbar.Taskbar.taskbar.resources;
+        protected internal static Config config = Taskbar.Taskbar.config;
+        protected internal static History history = Taskbar.Taskbar.history;
+        protected internal static Resources resources = Taskbar.Taskbar.resources;
         #endregion
         /******************************************************************/
 
-        public history_settings()
+        protected internal history_settings()
         {
             InitializeComponent();
         }
