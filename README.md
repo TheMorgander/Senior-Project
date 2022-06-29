@@ -15,8 +15,3 @@ Resources include:
 This project uses CSDeskBand for easier interfacing with the Windows Taskbar.
 
 See: https://github.com/dsafa/CSDeskBand
-
-## Notes
-Due to technical difficulties with Windows Taskbar Applications, this project has been abandoned in favor of the monitor project.
-
-See: https://github.com/TheMorgander/Monitor/
